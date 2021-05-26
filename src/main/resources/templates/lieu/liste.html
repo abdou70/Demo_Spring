@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"  lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Lieu de Formation</title>
+        <link rel="stylesheet"   type="text/css" th:href="@{../css/bootstrap.min.css}" />
+    </head>
+    <body>
+    <div class="nav navbar-default">
+        <ul class="nav navbar-nav">
+            <li><a th:href="@{/Lieu/liste}">Gestion des lieux</a></li>
+            <li><a th:href="@{/Formation/liste}">Gestion Des Formations</a></li>
+        </ul>
+    </div>
+    <div class="container col-sm-6 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Liste des lieux</div>
+            <div class="panel-body">
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th>Identifiant</th>
+                        <th>Nom</th>
+                        <th>Longitude</th>
+                        <th>Latitude</th>
+                        <th>Action</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each="l:${liste_lieux}">
+                        <td th:text="${l.id}"></td>
+                        <td th:text="${l.nom}"></td>
+                        <td th:text="${l.latitude}"></td>
+                        <td th:text="${l.longitude}"></td>
+                        <td><a th:href="@{/Lieu/edit(id=${l.id})}">Editer</a></td>
+                        <td><a th:href="@{/Lieu/delete(id=${l.id})}">Supprimer</a></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel-footer">Gestion des Lieux</div>
+        </div>
+    </div>
+    <div class="container col-sm-6 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Formulaire de Gestion des lieux</div>
+            <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <label class="control-label">Nom du lieu</label>
+                        <input  class="form-control" type="text"  name="nom_lieu" id="nom_lieu" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Longitude du lieu</label>
+                        <input  class="form-control" type="text"  name="longitude" id="longitude_lieu" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Latitude du lieu</label>
+                        <input  class="form-control" type="text"  name="latitude" id="latitude_lieu" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">User du lieu</label>
+                        <select  class="form-control" type="text"  name="lieu" id="_lieu" >
+                            <option value="0">faite votre choix</option>
+                            <option th:each="u:${liste_users}" th:value="${u.id}" th:text="${u.nom+' '+u.prenom}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-success" type="submit" name="valider" value="valider" id="valider" />
+                        <input  class="btn btn-danger" type="reset"  name="reset" value="annuler" id="annuler"  />
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer">Gestion des Lieux</div>
+        </div>
+    </div>
+    </body>
+</html>
