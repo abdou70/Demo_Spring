@@ -35,9 +35,10 @@ public class LieuController {
     }
 
     @RequestMapping(value = "/Lieu/add", method = RequestMethod.POST)
-    public String add(String nom, double longitude, double latitude, int idUser){
+    public String add(int id, String nom, double longitude, double latitude, int idUser){
         ModelAndView modelAndView = new ModelAndView();
         Lieu lieu = new Lieu();
+        lieu.setId(id);
         lieu.setNom(nom);
         lieu.setLongitude(longitude);
         lieu.setLatitude(latitude);
