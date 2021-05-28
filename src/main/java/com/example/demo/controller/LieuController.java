@@ -30,6 +30,7 @@ public class LieuController {
 
         model.put("liste_lieux",lieux);
         model.put("liste_users",users);
+        model.put("lieu" , new Lieu());
         return  "lieu/liste";
     }
 
@@ -48,10 +49,34 @@ public class LieuController {
             lieudao.save(lieu);
 
         } catch (Exception ex){
+            ex.printStackTrace();
 
         }
 
         modelAndView.addObject(new String("lieu/liste"));
         return "redirect:/Lieu/liste";
+    }
+    @RequestMapping(value = "/Lieu/delete" , method = RequestMethod.GET)
+    public String delete(int id){
+
+        try{
+            lieudao.delete(lieudao.getOne(id));
+        }catch (Exception ex){
+            ex.printStackTrace();
+
+        }
+        return "redirect:/Lieu/liste";
+    }
+    @RequestMapping(value="/Lieu/edit", method=RequestMethod.GET)
+    public String edit(int id, ModelMap model){
+        List<Lieu> lieux = lieudao.findAll();
+        List<User> users = userdao.findAll();
+        model.put("liste_lieux",lieux);
+        model.put("liste_users",users);
+
+        Lieu lieu = lieudao.getOne(id);
+        model.put("lieu",lieu);
+
+        return"lieu/liste";
     }
 }
